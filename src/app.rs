@@ -1,6 +1,6 @@
 use std::{fmt::Display, time::Duration};
 
-use chrono::NaiveDateTime;
+
 use egui::{Button, Color32};
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
@@ -65,9 +65,9 @@ impl Display for PomodoroMode {
     }
 }
 
-impl Into<egui::Color32> for PomodoroMode {
-    fn into(self) -> egui::Color32 {
-        match self {
+impl From<PomodoroMode> for egui::Color32 {
+    fn from(val: PomodoroMode) -> Self {
+        match val {
             PomodoroMode::LongBreak => Color32::from_rgb(240, 140, 58),
             PomodoroMode::ShortBreak => Color32::from_rgb(240, 231, 58),
             PomodoroMode::Work => Color32::from_rgb(58, 191, 240),
