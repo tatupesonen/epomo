@@ -6,6 +6,7 @@ license = "MIT"
 authors = ["Tatu Pesonen <tatu@narigon.dev>"]
 repository = "https://github.com/tatupesonen/epomo"
 edition = "2021"
+keywords = ["pomodoro", "timer", "egui"]
 rust-version = "1.65"
 
 
