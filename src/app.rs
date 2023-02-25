@@ -1,6 +1,5 @@
 use std::{fmt::Display, time::Duration};
 
-
 use egui::{Button, Color32};
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
