@@ -1,6 +1,7 @@
 use std::{fmt::Display, time::Duration};
 
 use egui::{Button, Color32};
+use notify_rust::Notification;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize)]
@@ -11,6 +12,7 @@ pub struct EpomoApp {
     long_break_period: i64,
     short_break_period: i64,
     session_count: usize,
+    show_notifs: bool,
 
     #[serde(skip)]
     current_mode: PomodoroMode,
@@ -25,6 +27,7 @@ impl Default for EpomoApp {
             long_break_period: 15,
             short_break_period: 5,
             session_count: 0,
+            show_notifs: true,
             ends_at: None,
             current_mode: PomodoroMode::Work, // Begin with work
         }
@@ -52,6 +55,16 @@ enum PomodoroMode {
     LongBreak,
     ShortBreak,
     Work,
+}
+
+impl PomodoroMode {
+    fn get_notif_str(&self) -> &'static str {
+        match *self {
+            PomodoroMode::LongBreak => "Time for a long break!",
+            PomodoroMode::ShortBreak => "Time for a short break!",
+            PomodoroMode::Work => "Time to work!",
+        }
+    }
 }
 
 impl Display for PomodoroMode {
@@ -113,6 +126,7 @@ impl eframe::App for EpomoApp {
             short_break_period,
             current_mode,
             session_count,
+            show_notifs,
         } = self;
 
         egui::CentralPanel::default().show(ctx, |ui| {
@@ -138,6 +152,7 @@ impl eframe::App for EpomoApp {
                     egui::Slider::new(long_break_period, 1..=120).suffix("m"),
                 );
             });
+            ui.add(egui::Checkbox::new(show_notifs, "Show notifications"));
             ui.horizontal(|ui| {
                 if ui
                     .add_enabled(ends_at.is_none(), Button::new("Start"))
@@ -180,6 +195,13 @@ impl eframe::App for EpomoApp {
                                 chrono::Utc::now() + chrono::Duration::minutes(*interval_period),
                             )
                         }
+                    }
+                    if *show_notifs {
+                        Notification::new()
+                            .summary("epomo")
+                            .body(current_mode.get_notif_str())
+                            .show()
+                            .unwrap();
                     }
                     ctx.request_repaint();
                 }
