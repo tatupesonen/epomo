@@ -11,7 +11,11 @@ fn main() -> eframe::Result<()> {
 
     eframe::run_native(
         "epomo",
-        eframe::NativeOptions { initial_window_size: Some(Vec2::new(200.0, 225.0)), resizable: false, ..Default::default() },
+        eframe::NativeOptions {
+            initial_window_size: Some(Vec2::new(200.0, 225.0)),
+            resizable: false,
+            ..Default::default()
+        },
         Box::new(|cc| Box::new(epomo::EpomoApp::new(cc))),
     )
 }

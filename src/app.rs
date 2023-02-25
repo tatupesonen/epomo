@@ -88,12 +88,12 @@ fn format_duration(duration: chrono::Duration, mode: PomodoroMode) -> String {
 fn get_mode(cur_mode: PomodoroMode, session_count: usize) -> PomodoroMode {
     match cur_mode {
         PomodoroMode::Work => {
-					if session_count % 4 == 0 {
-						PomodoroMode::LongBreak
-					} else {
-						PomodoroMode::ShortBreak
-					}
-				}
+            if session_count % 4 == 0 {
+                PomodoroMode::LongBreak
+            } else {
+                PomodoroMode::ShortBreak
+            }
+        }
         _ => PomodoroMode::Work,
     }
 }
@@ -182,7 +182,7 @@ impl eframe::App for EpomoApp {
                             )
                         }
                     }
-										ctx.request_repaint();
+                    ctx.request_repaint();
                 }
                 ui.label(
                     egui::RichText::new(format_duration(time_left, *current_mode))
