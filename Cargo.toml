@@ -1,6 +1,6 @@
 [package]
 name = "epomo"
-version = "0.1.0"
+version = "0.1.1"
 description = "A tiny Pomodoro app written on top of egui."
 license = "MIT"
 authors = ["Tatu Pesonen <tatu@narigon.dev>"]
