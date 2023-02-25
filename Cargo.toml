@@ -1,6 +1,8 @@
 [package]
 name = "epomo"
 version = "0.1.0"
+description = "A tiny Pomodoro app written on top of egui."
+license = "MIT"
 authors = ["Tatu Pesonen <tatu@narigon.dev>"]
 edition = "2021"
 rust-version = "1.65"
