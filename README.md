@@ -1,7 +1,8 @@
 # epomo
 A tiny pomodoro app in Rust.
 
-![image](https://user-images.githubusercontent.com/7150217/221366908-042bd8fb-368d-4362-b0e6-ee4536ad58e3.png)
+![image](https://user-images.githubusercontent.com/7150217/221368795-0be01772-316b-4cb5-8b95-b1837e083408.png)
+
 
 
 ## Installation
